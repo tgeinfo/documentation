@@ -68,6 +68,17 @@ git clone --depth 1 --filter=blob:none --sparse https://github.com/tgeinfo/scrip
 cd chirpstack-thingsboard
 git sparse-checkout set chirpstack-thingsboard
 
+# Récupère les fichiers de configuration pour chirpstack
+echo "Clonage du dépôt chirpstack-docker..."
+sleep 5
+git clone https://github.com/chirpstack/chirpstack-docker.git
+
+# Déplace et créé le dossier souhaité vers le répertoire parent et nettoie
+echo "Déplacement des fichiers de configuration chirpstack..."
+sleep 5
+cp -R chirpstack-docker/configuration ./configuration
+rm -rf chirpstack-docker
+
 # Déplace le dossier souhaité vers le répertoire parent et nettoie
 echo "Déplacement des fichiers clonés et nettoyage..."
 sleep 5
