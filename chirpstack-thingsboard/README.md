@@ -355,16 +355,9 @@ Avant de créer un dispositif, il est recommandé de créer un **Device Profile*
 En créant manuellement le profil de dispositif, vous pouvez personnaliser les paramètres selon les besoins de votre dispositif. Si vous utilisez un codec spécifique pour le décodage des payloads (comme **CayenneLPP**), assurez-vous de le configurer dans le profil de dispositif :
 
 1. **Dans le profil de dispositif**, allez à l'onglet **"Codec"**.
-2. **Sélectionnez "Custom JavaScript codec"**.
-3. **Entrez le code JavaScript** pour le décodage du payload.
+2. **Sélectionnez "CayenneLPP"**.
 
-Exemple de code pour **CayenneLPP** :
 
-```javascript
-function Decode(fPort, bytes) {
-  return DecodeCayenneLPP(bytes);
-}
-```
 
 ## Informations sur le Maduino Zero
 
