@@ -37,7 +37,7 @@ sudo systemctl start docker
 git clone https://github.com/chirpstack/chirpstack-docker.git
 
 # Déplace et créé le dossier souhaité vers le répertoire parent et nettoie
-cp chirpstack-docker/configuration ./configuration
+cp -R chirpstack-docker/configuration ./configuration
 rm -rf chirpstack-docker
 
 # Clone le dossier spécifique du dépôt
