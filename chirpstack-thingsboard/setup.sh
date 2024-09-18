@@ -13,12 +13,32 @@
 #    les fichiers temporaires et le dossier .git.
 
 # Met à jour et met à niveau Ubuntu
+
 sudo apt-get update && sudo apt-get upgrade -y
 
-# Installe Docker et Docker Compose
-sudo apt-get install -y docker.io docker-compose
-sudo systemctl start docker
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
 sudo systemctl enable docker
+sudo systemctl start docker
+
+# Récupère les fichiers de configuration pour chirpstack
+git clone https://github.com/chirpstack/chirpstack-docker.git
+
+# Déplace et créé le dossier souhaité vers le répertoire parent et nettoie
+cp chirpstack-docker/configuration ./configuration
+rm -rf chirpstack-docker
 
 # Clone le dossier spécifique du dépôt
 git clone --depth 1 --filter=blob:none --sparse https://github.com/tgeinfo/scripts.git chirpstack-thingsboard
@@ -33,14 +53,8 @@ rm -rf arduino documentation chirpstack-thingsboard .git
 mkdir -p ./mytb-data && sudo chown -R 799:799 ./mytb-data
 mkdir -p ./mytb-logs && sudo chown -R 799:799 ./mytb-logs
 
-# Télécharge l'image Docker de ThingsBoard avec PostgreSQL
-sudo docker pull thingsboard/tb-postgres
-
-# Exécute le script de mise à niveau de ThingsBoard
-sudo docker run -it -v ./mytb-data:/data --rm thingsboard/tb-postgres upgrade-tb.sh
-
-# Supprime le conteneur 'mytb' s'il existe
-sudo docker-compose rm mytb
-
-# Démarre les services définis dans le fichier docker-compose
+# Démarre les docker avec docker-compose
 sudo docker-compose up
+
+
+
