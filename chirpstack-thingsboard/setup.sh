@@ -54,7 +54,7 @@ mkdir -p ./mytb-data && sudo chown -R 799:799 ./mytb-data
 mkdir -p ./mytb-logs && sudo chown -R 799:799 ./mytb-logs
 
 # Démarre les docker avec docker-compose
-sudo docker-compose up
+sudo docker compose up
 
 
 
