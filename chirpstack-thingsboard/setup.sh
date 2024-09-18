@@ -50,17 +50,6 @@ sleep 5
 sudo systemctl enable docker
 sudo systemctl start docker
 
-# Récupère les fichiers de configuration pour chirpstack
-echo "Clonage du dépôt chirpstack-docker..."
-sleep 5
-git clone https://github.com/chirpstack/chirpstack-docker.git
-
-# Déplace et créé le dossier souhaité vers le répertoire parent et nettoie
-echo "Déplacement des fichiers de configuration chirpstack..."
-sleep 5
-cp -R chirpstack-docker/configuration ./configuration
-rm -rf chirpstack-docker
-
 # Clone le dossier spécifique du dépôt
 echo "Clonage du dépôt tgeinfo/scripts avec extraction sparse..."
 sleep 5
