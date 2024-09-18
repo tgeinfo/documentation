@@ -27,7 +27,7 @@ git sparse-checkout set chirpstack-thingsboard
 
 # Déplace le dossier souhaité vers le répertoire parent et nettoie
 mv chirpstack-thingsboard/* .
-rm -rf chirpstack-thingsboard .git
+rm -rf arduino documentation chirpstack-thingsboard .git
 
 # Crée les répertoires nécessaires et modifie les permissions
 mkdir -p ./mytb-data && sudo chown -R 799:799 ./mytb-data
