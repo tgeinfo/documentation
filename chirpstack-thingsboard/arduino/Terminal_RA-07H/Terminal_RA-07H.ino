@@ -1,10 +1,10 @@
-
 /*<--------------------------------------------------------------------------------------->*/
 /*
     Ce code permet de communiquer avec le module LoRaWAN RA-07H en utilisant la connexion
-    série. Il est possible d'envoyer des commandes AT au module et de recevoir les réponses
+    série. Il est possible d'envoyer des commandes AT au module et de recevoir les réponses.
 
-    C'est utile pour tester le module et pour comprendre son fonctionnement.
+    Ce programme est utile pour tester le module et pour comprendre son fonctionnement.
+    Il permet d'établir une communication bidirectionnelle entre le module et l'ordinateur.
 
     Ce code est sous licence CC-BY-SA. 
 
@@ -14,74 +14,70 @@
     Date de modification : 2023-08-29
     Version : 1.0
     
-    *Assisté de : Chatgpt et Github Copilot
+    *Assisté de : ChatGPT et GitHub Copilot
 */
 /*<--------------------------------------------------------------------------------------->*/
 
-//pin pour le module lorawan
-int PWR_KEY = 9;
-int RST_KEY = 6;
-int LOW_PWR_KEY = 5;
+// Pins pour le module LoRaWAN
+int PWR_KEY = 9;           // Pin pour activer/désactiver l'alimentation du module
+int RST_KEY = 6;           // Pin pour réinitialiser le module
+int LOW_PWR_KEY = 5;       // Pin pour activer/désactiver le mode basse consommation
 
-
-void setup()
-{
-    // initialisation du module lorawan
+void setup() {
+    // Initialisation du module LoRaWAN
     pin_init();
 
-    // initialisation des ports série
-    SerialUSB.begin(115200);
-    Serial1.begin(115200);
+    // Initialisation des ports série pour la communication avec le PC et le module LoRaWAN
+    SerialUSB.begin(115200);   // Communication avec le PC pour affichage des messages de débogage
+    Serial1.begin(115200);     // Communication avec le module RA-07H
 
     delay(1000);
 
-    // afficher un message de bienvenue
-    SerialUSB.println("Welcome to the LoRaWAN terminal.");
+    // Afficher un message de bienvenue
+    SerialUSB.println("Bienvenue sur le terminal LoRaWAN.");
     SerialUSB.println();
 }
 
-// boucle principale
-void loop()
-{
-    // vérifier si il y a des données sur le port série
-    if (SerialUSB.available())
-    {
-        // lire les données du port série
+// Boucle principale du programme
+void loop() {
+    // Vérifier s'il y a des données entrantes sur le port série USB (depuis le PC)
+    if (SerialUSB.available()) {
+        // Lire les données envoyées par l'utilisateur via le terminal
         String data = SerialUSB.readStringUntil('\n');
 
-        // afficher les données sur le port série
-        SerialUSB.println(data);
+        // Afficher les données reçues sur le terminal USB (pour confirmation)
+        SerialUSB.println("Commande reçue : " + data);
 
-        // envoyer les données au module lorawan
+        // Envoyer les données au module LoRaWAN pour exécution
         Serial1.println(data);
     }
 
-    // vérifier si il y a des données sur le port série du module lorawan
-    if (Serial1.available())
-    {
-        // lire les données du port série du module lorawan
+    // Vérifier s'il y a des données entrantes sur le port série du module LoRaWAN
+    if (Serial1.available()) {
+        // Lire la réponse envoyée par le module RA-07H
         String data = Serial1.readStringUntil('\n');
 
-        // imprimer les données sur le port série
-        SerialUSB.println(data);
+        // Imprimer la réponse du module sur le terminal USB
+        SerialUSB.println("Réponse du module : " + data);
     }
 }
 
 /*
-    * Fonction pour initialiser les pins du module lorawan
+    * Fonction pour initialiser les pins du module LoRaWAN
+    * Cette initialisation est essentielle pour mettre correctement sous tension et réinitialiser le module.
 */
-void pin_init()
-{
-    pinMode(PWR_KEY, OUTPUT);
-    pinMode(RST_KEY, OUTPUT);
-    pinMode(LOW_PWR_KEY, OUTPUT);
+void pin_init() {
+    pinMode(PWR_KEY, OUTPUT);  // Configurer la broche PWR_KEY comme sortie
+    pinMode(RST_KEY, OUTPUT);  // Configurer la broche RST_KEY comme sortie
+    pinMode(LOW_PWR_KEY, OUTPUT);  // Configurer la broche LOW_PWR_KEY comme sortie
 
-    digitalWrite(RST_KEY, LOW);
-    digitalWrite(LOW_PWR_KEY, HIGH);
-    digitalWrite(PWR_KEY, HIGH);
+    // Séquence d'initialisation pour mettre sous tension et réinitialiser le module
+    digitalWrite(RST_KEY, LOW);  // Maintenir le module en état réinitialisé
+    digitalWrite(LOW_PWR_KEY, HIGH);  // Désactiver le mode basse consommation
+    digitalWrite(PWR_KEY, HIGH);  // Alimenter le module
 
-    digitalWrite(PWR_KEY, LOW);
-    delay(3000);
+    digitalWrite(PWR_KEY, LOW);  // Cycle de mise sous tension
+    delay(3000);  // Attendre un court instant avant de remettre sous tension
     digitalWrite(PWR_KEY, HIGH);
-    delay(10000);
+    delay(10000);  // Attendre que le module soit complètement initialisé
 }
