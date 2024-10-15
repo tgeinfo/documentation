@@ -53,7 +53,7 @@ sudo systemctl start docker
 # Clone le dossier spécifique du dépôt
 echo "Clonage du dépôt tgeinfo/scripts avec extraction sparse..."
 sleep 5
-git clone --depth 1 --filter=blob:none --sparse https://github.com/tgeinfo/scripts.git chirpstack-thingsboard
+git clone --depth 1 --filter=blob:none --sparse https://github.com/tgeinfo/documentation.git chirpstack-thingsboard
 cd chirpstack-thingsboard
 git sparse-checkout set chirpstack-thingsboard
 
