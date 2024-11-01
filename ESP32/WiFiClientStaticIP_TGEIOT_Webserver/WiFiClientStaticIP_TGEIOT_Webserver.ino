@@ -45,22 +45,12 @@
 
 
 #include <WiFi.h>             // Bibliothèque pour les fonctionnalités Wi-Fi de base de l'ESP32
-#include "esp_wifi.h"         // Bibliothèque pour accéder aux fonctions avancées, comme la modification de l'adresse MAC
 #include <WebServer.h>        // Bibliothèque pour gérer un serveur web simple
 
 // Identifiants du réseau Wi-Fi à rejoindre
-const char *ssid = "TGE-IOT";      // Nom du réseau Wi-Fi (SSID)
+const char *ssid = "CPI-IOT";      // Nom du réseau Wi-Fi (SSID)
 const char *password = "xxxxxx";  // Mot de passe du réseau Wi-Fi
 
-// Configuration de l'adresse IP statique
-IPAddress local_IP(10, 63, 100, 40);         // Adresse IP statique assignée à l'ESP32
-IPAddress gateway(10, 63, 0, 1);            // Adresse de la passerelle du réseau
-IPAddress subnet(255, 255, 0, 0);           // Masque de sous-réseau
-IPAddress primaryDNS(10, 2, 0, 211);        // Adresse du serveur DNS principal (optionnel)
-IPAddress secondaryDNS(10, 2, 0, 210);      // Adresse du serveur DNS secondaire (optionnel)
-
-// Nouvelle adresse MAC à attribuer à l'ESP32
-uint8_t New_MAC_Address[6] = { 0xAA, 0xAD, 0xEE, 0xEF, 0xFF, 0xED };
 
 // Déclaration du serveur web sur le port 80
 WebServer server(80);
@@ -75,19 +65,6 @@ void setup() {
 
   // Configurer l'ESP32 en mode station (client Wi-Fi)
   WiFi.mode(WIFI_STA);
-
-  // Modifier l'adresse MAC avant de démarrer la connexion Wi-Fi
-  esp_err_t result = esp_wifi_set_mac(WIFI_IF_STA, New_MAC_Address);
-  if (result == ESP_OK) {
-    Serial.println("Adresse MAC modifiée avec succès.");
-  } else {
-    Serial.printf("Échec du changement de l'adresse MAC. Code d'erreur : %d\n", result);
-  }
-
-  // Configurer l'adresse IP statique avant d'établir la connexion Wi-Fi
-  if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
-    Serial.println("Échec de la configuration de l'IP statique.");
-  }
 
   // Débuter la connexion au réseau Wi-Fi
   Serial.print("Connexion au réseau ");
