@@ -1,0 +1,1 @@
+netsh advfirewall firewall delete rule name="ICMP Allow incoming V4 echo request"
