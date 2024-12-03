@@ -10,12 +10,14 @@ Ce guide vous montre comment utiliser un écran OLED SSD1315 avec un Arduino Uno
 
 ## Connexions
 
-> Note : Sur l'Arduino Uno, les broches SDA et A4, ainsi que SCL et A5, sont les mêmes entrées/sorties utilisées pour la communication I2C.
-
 1. **VCC** du module OLED vers **5V** de l'Arduino.
 2. **GND** du module OLED vers **GND** de l'Arduino.
 3. **SCL (CLK)** du module OLED vers **A5** de l'Arduino (SCL).
 4. **SDA (DIN)** du module OLED vers **A4** de l'Arduino (SDA).
+
+> Note : Sur l'Arduino Uno, les broches SDA et A4, ainsi que SCL et A5, sont les mêmes entrées/sorties utilisées pour la communication I2C.
+> **Important : Assurez-vous de retirer la résistance R1 pour utiliser l'écran en mode I2C.**
+
 
 ## Configuration logicielle
 
@@ -92,12 +94,7 @@ Vérifiez l'adresse I2C de votre module SSD1315 en utilisant un scanner I2C. Cel
 
 - [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
 - [Adafruit SSD1306 Library](https://github.com/adafruit/Adafruit_SSD1306)
-
-## Note pour les étudiants
-
-Pour le projet de stationnement, veuillez vous référer à la documentation suivante pour plus de détails sur l'utilisation du SSD1315 : [Documentation SSD1315](https://www.waveshare.com/wiki/0.96inch_OLED_Module).
-
-**Important : Assurez-vous de retirer la résistance R1 pour utiliser l'écran en mode I2C.**
+- [Documentation SSD1315](https://www.waveshare.com/wiki/0.96inch_OLED_Module).
 
 ## Conclusion
 
