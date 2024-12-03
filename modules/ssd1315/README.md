@@ -1,28 +1,30 @@
-Pour utiliser un SSD1315 avec un Arduino Uno via le port I2C, en utilisant les bibliothèques **Adafruit\_SSD1306** et **Adafruit\_GFX**, voici un guide simple :
+# Guide d'utilisation du SSD1315 avec un Arduino Uno via I2C
 
-### Matériel nécessaire :
+Ce guide vous montre comment utiliser un écran OLED SSD1315 avec un Arduino Uno en utilisant les bibliothèques **Adafruit_SSD1306** et **Adafruit_GFX**. Vous trouverez ci-dessous le matériel nécessaire, les connexions, la configuration logicielle et un exemple de code pour commencer.
+
+## Matériel nécessaire
 
 - Un module OLED SSD1315 (compatible I2C)
 - Arduino Uno
 - Fils de connexion (Dupont)
 
-### Connexions :
+## Connexions
 
 > Note : Sur l'Arduino Uno, les broches SDA et A4, ainsi que SCL et A5, sont les mêmes entrées/sorties utilisées pour la communication I2C.
 
 1. **VCC** du module OLED vers **5V** de l'Arduino.
 2. **GND** du module OLED vers **GND** de l'Arduino.
-3. **SCL** du module OLED vers **A5** de l'Arduino (SCL).
-4. **SDA** du module OLED vers **A4** de l'Arduino (SDA).
+3. **SCL (CLK)** du module OLED vers **A5** de l'Arduino (SCL).
+4. **SDA (DIN)** du module OLED vers **A4** de l'Arduino (SDA).
 
-### Configuration logicielle :
+## Configuration logicielle
 
 1. **Installer les bibliothèques**
    - Ouvrez l'**Arduino IDE**.
    - Allez dans **Outils** → **Gérer les bibliothèques...**.
    - Recherchez **Adafruit SSD1306** et **Adafruit GFX**, puis installez-les.
 
-### Code d'exemple :
+## Code d'exemple
 
 Voici un exemple de code pour initialiser l'écran et afficher du texte pour valider son fonctionnement.
 
@@ -75,23 +77,29 @@ void loop() {
 }
 ```
 
-### Explications :
+## Explications
 
-1. **Bibliothèques** : Les bibliothèques **Wire**, **Adafruit\_GFX**, et **Adafruit\_SSD1306** sont nécessaires pour contrôler l'écran.
+1. **Bibliothèques** : Les bibliothèques **Wire**, **Adafruit_GFX**, et **Adafruit_SSD1306** sont nécessaires pour contrôler l'écran.
 2. **Initialisation** : `display.begin()` initialise l'écran SSD1315 avec l'adresse I2C (par défaut 0x3C ou 0x3D selon les modules).
 3. **Effacer et afficher** : `clearDisplay()` efface l'écran avant chaque utilisation, et `display.display()` envoie le contenu à l'écran.
 4. **Texte** : `setTextSize()`, `setTextColor()`, et `setCursor()` permettent de personnaliser le texte.
 
-### Astuce :
+## Astuce
 
 Vérifiez l'adresse I2C de votre module SSD1315 en utilisant un scanner I2C. Cela peut être utile si l'écran ne fonctionne pas correctement.
 
-### Références :
+## Références
 
 - [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
 - [Adafruit SSD1306 Library](https://github.com/adafruit/Adafruit_SSD1306)
 
-### Conclusion :
+## Note pour les étudiants
 
-Avec ce guide, vous devriez être en mesure d'afficher du texte sur votre écran OLED SSD1315 en utilisant un Arduino Uno. Pour des applications plus complexes, explorez d'autres fonctions de la bibliothèque **Adafruit\_GFX** comme l'affichage de formes ou de graphismes.
+Pour le projet de stationnement, veuillez vous référer à la documentation suivante pour plus de détails sur l'utilisation du SSD1315 : [Documentation SSD1315](https://www.waveshare.com/wiki/0.96inch_OLED_Module).
+
+**Important : Assurez-vous de retirer la résistance R1 pour utiliser l'écran en mode I2C.**
+
+## Conclusion
+
+Avec ce guide, vous devriez être en mesure d'afficher du texte sur votre écran OLED SSD1315 en utilisant un Arduino Uno. Pour des applications plus complexes, explorez d'autres fonctions de la bibliothèque **Adafruit_GFX** comme l'affichage de formes ou de graphismes.
 
