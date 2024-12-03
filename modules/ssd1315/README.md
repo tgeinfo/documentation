@@ -10,8 +10,8 @@ Pour utiliser un SSD1315 avec un Arduino Uno via le port I2C, en utilisant les b
 
 1. **VCC** du module OLED vers **5V** de l'Arduino.
 2. **GND** du module OLED vers **GND** de l'Arduino.
-3. **SCL** du module OLED vers **A5** de l'Arduino (SCL).
-4. **SDA** du module OLED vers **A4** de l'Arduino (SDA).
+3. **SCL** du module OLED vers **SCL** de l'Arduino.
+4. **SDA** du module OLED vers **SDA** de l'Arduino.
 
 ### Configuration logicielle :
 
